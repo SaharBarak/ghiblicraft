@@ -43,5 +43,95 @@
     "sounds": [
       "ghiblicraft:entity/spirit_whisper"
     ]
+  },
+  "music.totoro_forest": {
+    "subtitle": "subtitles.ghiblicraft.music.totoro_forest",
+    "sounds": [
+      {
+        "name": "ghiblicraft:music/totoro_forest_theme",
+        "stream": true
+      }
+    ]
+  },
+  "music.flower_valley": {
+    "subtitle": "subtitles.ghiblicraft.music.flower_valley",
+    "sounds": [
+      {
+        "name": "ghiblicraft:music/flower_valley_theme",
+        "stream": true
+      }
+    ]
+  },
+  "music.windmill_fields": {
+    "subtitle": "subtitles.ghiblicraft.music.windmill_fields",
+    "sounds": [
+      {
+        "name": "ghiblicraft:music/windmill_fields_theme",
+        "stream": true
+      }
+    ]
+  },
+  "music.spirit_lake": {
+    "subtitle": "subtitles.ghiblicraft.music.spirit_lake",
+    "sounds": [
+      {
+        "name": "ghiblicraft:music/spirit_lake_theme",
+        "stream": true
+      }
+    ]
+  },
+  "music.bamboo_hills": {
+    "subtitle": "subtitles.ghiblicraft.music.bamboo_hills",
+    "sounds": [
+      {
+        "name": "ghiblicraft:music/bamboo_hills_theme",
+        "stream": true
+      }
+    ]
+  },
+  "music.lantern_festival": {
+    "subtitle": "subtitles.ghiblicraft.music.lantern_festival",
+    "sounds": [
+      {
+        "name": "ghiblicraft:music/lantern_festival_theme",
+        "stream": true
+      }
+    ]
+  },
+  "music.spirit_realm": {
+    "subtitle": "subtitles.ghiblicraft.music.spirit_realm",
+    "sounds": [
+      {
+        "name": "ghiblicraft:music/spirit_realm_theme",
+        "stream": true
+      }
+    ]
+  },
+  "music.night_serenade": {
+    "subtitle": "subtitles.ghiblicraft.music.night_serenade",
+    "sounds": [
+      {
+        "name": "ghiblicraft:music/night_serenade",
+        "stream": true
+      }
+    ]
+  },
+  "music.dawn_chorus": {
+    "subtitle": "subtitles.ghiblicraft.music.dawn_chorus",
+    "sounds": [
+      {
+        "name": "ghiblicraft:music/dawn_chorus",
+        "stream": true
+      }
+    ]
+  },
+  "music.music_box": {
+    "subtitle": "subtitles.ghiblicraft.music.music_box",
+    "sounds": [
+      {
+        "name": "ghiblicraft:music/music_box_melody",
+        "stream": true
+      }
+    ]
   }
 }

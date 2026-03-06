@@ -12,6 +12,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import ghiblicraft.entities.renderers.*;
 import ghiblicraft.entities.models.*;
 import ghiblicraft.sounds.AtmosphereHandler;
+import ghiblicraft.sounds.GhibliMusicManager;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 
 public class GhibliCraftClient implements ClientModInitializer {
@@ -55,5 +56,8 @@ public class GhibliCraftClient implements ClientModInitializer {
 
         // Atmosphere handler for ambient sounds and particles
         AtmosphereHandler.register();
+
+        // Ghibli music system — biome and event-based background music
+        GhibliMusicManager.register();
     }
 }
