@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "CHC",
+    "CCC"
+  ],
+  "key": {
+    "C": { "item": "minecraft:coal" },
+    "H": { "item": "minecraft:hopper" }
+  },
+  "result": { "item": "ghiblicraft:soot_sprite_workshop", "count": 1 }
+}

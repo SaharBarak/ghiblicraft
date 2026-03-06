@@ -56,6 +56,8 @@ public class ModItems {
 
     // Special items
     public static final Item MAGICAL_BROOMSTICK = new ghiblicraft.items.MagicalBroomstickItem();
+    public static final Item WIND_RIDER_GLIDER = new ghiblicraft.items.WindRiderGlider();
+    public static final Item SPIRIT_PORTAL_KEY = new Item(new FabricItemSettings().maxCount(1));
 
     // Item Group
     public static final RegistryKey<ItemGroup> GHIBLICRAFT_GROUP = RegistryKey.of(
@@ -72,6 +74,8 @@ public class ModItems {
         Registry.register(Registries.ITEM, new Identifier(GhibliCraft.MOD_ID, "spirit_essence"), SPIRIT_ESSENCE);
         Registry.register(Registries.ITEM, new Identifier(GhibliCraft.MOD_ID, "forest_herb"), FOREST_HERB);
         Registry.register(Registries.ITEM, new Identifier(GhibliCraft.MOD_ID, "magical_broomstick"), MAGICAL_BROOMSTICK);
+        Registry.register(Registries.ITEM, new Identifier(GhibliCraft.MOD_ID, "wind_rider_glider"), WIND_RIDER_GLIDER);
+        Registry.register(Registries.ITEM, new Identifier(GhibliCraft.MOD_ID, "spirit_portal_key"), SPIRIT_PORTAL_KEY);
 
         Registry.register(Registries.ITEM_GROUP, GHIBLICRAFT_GROUP,
                 FabricItemGroup.builder()
@@ -90,6 +94,8 @@ public class ModItems {
             content.add(SPIRIT_ESSENCE);
             content.add(FOREST_HERB);
             content.add(MAGICAL_BROOMSTICK);
+            content.add(WIND_RIDER_GLIDER);
+            content.add(SPIRIT_PORTAL_KEY);
         });
 
         GhibliCraft.LOGGER.info("Registered GhibliCraft items.");

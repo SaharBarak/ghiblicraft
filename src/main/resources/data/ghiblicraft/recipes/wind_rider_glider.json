@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "LLL",
+    "SFS",
+    "L L"
+  ],
+  "key": {
+    "L": { "item": "minecraft:leather" },
+    "S": { "item": "minecraft:stick" },
+    "F": { "item": "minecraft:feather" }
+  },
+  "result": { "item": "ghiblicraft:wind_rider_glider", "count": 1 }
+}

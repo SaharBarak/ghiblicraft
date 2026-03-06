@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPP",
+    "PBP",
+    "SSS"
+  ],
+  "key": {
+    "P": { "item": "minecraft:prismarine" },
+    "B": { "item": "minecraft:cauldron" },
+    "S": { "item": "ghiblicraft:spirit_essence" }
+  },
+  "result": { "item": "ghiblicraft:bathhouse", "count": 1 }
+}

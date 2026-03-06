@@ -11,6 +11,8 @@
   "item.ghiblicraft.spirit_essence": "Spirit Essence",
   "item.ghiblicraft.forest_herb": "Forest Herb",
   "item.ghiblicraft.magical_broomstick": "Magical Broomstick",
+  "item.ghiblicraft.wind_rider_glider": "Wind Rider Glider",
+  "item.ghiblicraft.spirit_portal_key": "Spirit Portal Key",
 
   "entity.ghiblicraft.kodama_spirit": "Kodama Spirit",
   "entity.ghiblicraft.soot_sprite": "Soot Sprite",
@@ -18,16 +20,23 @@
   "entity.ghiblicraft.cat_spirit": "Cat Spirit",
   "entity.ghiblicraft.no_face": "No-Face",
   "entity.ghiblicraft.broomstick": "Broomstick",
+  "entity.ghiblicraft.catbus": "Catbus",
+  "entity.ghiblicraft.haku_dragon": "Haku Dragon",
+  "entity.ghiblicraft.turnip_head": "Turnip Head",
 
   "block.ghiblicraft.calcifer_furnace": "Calcifer Furnace",
   "block.ghiblicraft.music_box": "Enchanted Music Box",
   "block.ghiblicraft.totoro_bus_stop": "Totoro Bus Stop",
+  "block.ghiblicraft.bathhouse": "Spirit Bathhouse",
+  "block.ghiblicraft.soot_sprite_workshop": "Soot Sprite Workshop",
+  "block.ghiblicraft.spell_inscription_table": "Spell Inscription Table",
 
   "biome.ghiblicraft.totoro_forest": "Totoro Forest",
   "biome.ghiblicraft.flower_valley": "Flower Valley",
   "biome.ghiblicraft.bamboo_hills": "Bamboo Hills",
   "biome.ghiblicraft.windmill_fields": "Windmill Fields",
   "biome.ghiblicraft.spirit_lake": "Spirit Lake",
+  "biome.ghiblicraft.spirit_realm": "Spirit Realm",
 
   "profession.ghiblicraft.herbalist": "Herbalist",
   "profession.ghiblicraft.fisher": "Fisher",

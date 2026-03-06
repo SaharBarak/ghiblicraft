@@ -7,6 +7,9 @@ import ghiblicraft.entities.KodamaSpiritEntity;
 import ghiblicraft.entities.SootSpriteEntity;
 import ghiblicraft.entities.NoFaceEntity;
 import ghiblicraft.entities.BroomstickEntity;
+import ghiblicraft.entities.mounts.CatbusEntity;
+import ghiblicraft.entities.mounts.HakuDragonEntity;
+import ghiblicraft.entities.companions.TurnipHeadEntity;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityDimensions;
@@ -71,12 +74,42 @@ public class ModEntities {
                     .build()
     );
 
+    public static final EntityType<CatbusEntity> CATBUS = Registry.register(
+            Registries.ENTITY_TYPE,
+            new Identifier(GhibliCraft.MOD_ID, "catbus"),
+            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, CatbusEntity::new)
+                    .dimensions(EntityDimensions.fixed(2.0f, 2.0f))
+                    .trackRangeChunks(10)
+                    .build()
+    );
+
+    public static final EntityType<HakuDragonEntity> HAKU_DRAGON = Registry.register(
+            Registries.ENTITY_TYPE,
+            new Identifier(GhibliCraft.MOD_ID, "haku_dragon"),
+            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, HakuDragonEntity::new)
+                    .dimensions(EntityDimensions.fixed(1.5f, 1.8f))
+                    .trackRangeChunks(12)
+                    .build()
+    );
+
+    public static final EntityType<TurnipHeadEntity> TURNIP_HEAD = Registry.register(
+            Registries.ENTITY_TYPE,
+            new Identifier(GhibliCraft.MOD_ID, "turnip_head"),
+            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, TurnipHeadEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.6f, 1.8f))
+                    .trackRangeChunks(8)
+                    .build()
+    );
+
     public static void register() {
         FabricDefaultAttributeRegistry.register(KODAMA_SPIRIT, KodamaSpiritEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(SOOT_SPRITE, SootSpriteEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(FOREST_GUARDIAN, ForestGuardianEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(CAT_SPIRIT, CatSpiritEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(NO_FACE, NoFaceEntity.createAttributes());
+        FabricDefaultAttributeRegistry.register(CATBUS, CatbusEntity.createAttributes());
+        FabricDefaultAttributeRegistry.register(HAKU_DRAGON, HakuDragonEntity.createAttributes());
+        FabricDefaultAttributeRegistry.register(TURNIP_HEAD, TurnipHeadEntity.createAttributes());
 
         GhibliCraft.LOGGER.info("Registered GhibliCraft entities.");
     }

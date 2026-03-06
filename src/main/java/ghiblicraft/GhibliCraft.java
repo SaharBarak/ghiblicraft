@@ -13,6 +13,9 @@ import ghiblicraft.registry.ModVillagerProfessions;
 import ghiblicraft.registry.ModWorldgen;
 import ghiblicraft.events.SeasonalCycleManager;
 import ghiblicraft.events.LanternFestivalEvent;
+import ghiblicraft.dimension.SpiritRealmDimension;
+import ghiblicraft.systems.SpiritReputationSystem;
+import ghiblicraft.systems.ForestCorruptionSystem;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +39,13 @@ public class GhibliCraft implements ModInitializer {
         ModStructures.register();
         ModWorldgen.register();
         ModVillagerProfessions.register();
+
+        // Dimension
+        SpiritRealmDimension.register();
+
+        // Systems
+        SpiritReputationSystem.register();
+        ForestCorruptionSystem.register();
 
         // Events
         SeasonalCycleManager.register();

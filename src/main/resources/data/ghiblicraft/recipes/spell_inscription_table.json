@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ALA",
+    "DED",
+    "OOO"
+  ],
+  "key": {
+    "A": { "item": "minecraft:amethyst_shard" },
+    "L": { "item": "minecraft:lapis_lazuli" },
+    "D": { "item": "minecraft:diamond" },
+    "E": { "item": "minecraft:enchanting_table" },
+    "O": { "item": "minecraft:obsidian" }
+  },
+  "result": { "item": "ghiblicraft:spell_inscription_table", "count": 1 }
+}
