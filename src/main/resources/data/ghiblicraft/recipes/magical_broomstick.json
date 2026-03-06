@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  S",
+    " S ",
+    "HHH"
+  ],
+  "key": {
+    "S": { "item": "minecraft:stick" },
+    "H": { "item": "ghiblicraft:forest_herb" }
+  },
+  "result": {
+    "item": "ghiblicraft:magical_broomstick",
+    "count": 1
+  }
+}

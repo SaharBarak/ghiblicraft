@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PPP",
+    "PNP",
+    "PPP"
+  ],
+  "key": {
+    "P": { "item": "minecraft:oak_planks" },
+    "N": { "item": "minecraft:note_block" }
+  },
+  "result": {
+    "item": "ghiblicraft:music_box",
+    "count": 1
+  }
+}

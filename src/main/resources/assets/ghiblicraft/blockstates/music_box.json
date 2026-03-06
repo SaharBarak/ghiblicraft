@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "playing=false": { "model": "ghiblicraft:block/music_box" },
+    "playing=true": { "model": "ghiblicraft:block/music_box" }
+  }
+}

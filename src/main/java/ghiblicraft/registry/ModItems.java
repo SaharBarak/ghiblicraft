@@ -54,6 +54,9 @@ public class ModItems {
     public static final Item SPIRIT_ESSENCE = new Item(new FabricItemSettings().maxCount(16));
     public static final Item FOREST_HERB = new Item(new FabricItemSettings().maxCount(64));
 
+    // Special items
+    public static final Item MAGICAL_BROOMSTICK = new ghiblicraft.items.MagicalBroomstickItem();
+
     // Item Group
     public static final RegistryKey<ItemGroup> GHIBLICRAFT_GROUP = RegistryKey.of(
             RegistryKeys.ITEM_GROUP, new Identifier(GhibliCraft.MOD_ID, "ghiblicraft_items"));
@@ -68,6 +71,7 @@ public class ModItems {
         Registry.register(Registries.ITEM, new Identifier(GhibliCraft.MOD_ID, "dumpling_wrapper"), DUMPLING_WRAPPER);
         Registry.register(Registries.ITEM, new Identifier(GhibliCraft.MOD_ID, "spirit_essence"), SPIRIT_ESSENCE);
         Registry.register(Registries.ITEM, new Identifier(GhibliCraft.MOD_ID, "forest_herb"), FOREST_HERB);
+        Registry.register(Registries.ITEM, new Identifier(GhibliCraft.MOD_ID, "magical_broomstick"), MAGICAL_BROOMSTICK);
 
         Registry.register(Registries.ITEM_GROUP, GHIBLICRAFT_GROUP,
                 FabricItemGroup.builder()
@@ -85,6 +89,7 @@ public class ModItems {
             content.add(DUMPLING_WRAPPER);
             content.add(SPIRIT_ESSENCE);
             content.add(FOREST_HERB);
+            content.add(MAGICAL_BROOMSTICK);
         });
 
         GhibliCraft.LOGGER.info("Registered GhibliCraft items.");

@@ -10,11 +10,18 @@
   "item.ghiblicraft.dumpling_wrapper": "Dumpling Wrapper",
   "item.ghiblicraft.spirit_essence": "Spirit Essence",
   "item.ghiblicraft.forest_herb": "Forest Herb",
+  "item.ghiblicraft.magical_broomstick": "Magical Broomstick",
 
   "entity.ghiblicraft.kodama_spirit": "Kodama Spirit",
   "entity.ghiblicraft.soot_sprite": "Soot Sprite",
   "entity.ghiblicraft.forest_guardian": "Forest Guardian",
   "entity.ghiblicraft.cat_spirit": "Cat Spirit",
+  "entity.ghiblicraft.no_face": "No-Face",
+  "entity.ghiblicraft.broomstick": "Broomstick",
+
+  "block.ghiblicraft.calcifer_furnace": "Calcifer Furnace",
+  "block.ghiblicraft.music_box": "Enchanted Music Box",
+  "block.ghiblicraft.totoro_bus_stop": "Totoro Bus Stop",
 
   "biome.ghiblicraft.totoro_forest": "Totoro Forest",
   "biome.ghiblicraft.flower_valley": "Flower Valley",

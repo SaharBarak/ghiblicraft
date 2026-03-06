@@ -1,5 +1,6 @@
 package ghiblicraft.entities;
 
+import ghiblicraft.entities.ai.SpiritBefriendGoal;
 import ghiblicraft.registry.ModStructures;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ai.goal.LookAroundGoal;
@@ -31,9 +32,10 @@ public class CatSpiritEntity extends PathAwareEntity {
 
     @Override
     protected void initGoals() {
-        this.goalSelector.add(0, new WanderAroundFarGoal(this, 0.6));
-        this.goalSelector.add(1, new LookAtEntityGoal(this, PlayerEntity.class, 10.0f));
-        this.goalSelector.add(2, new LookAroundGoal(this));
+        this.goalSelector.add(0, new SpiritBefriendGoal(this));
+        this.goalSelector.add(1, new WanderAroundFarGoal(this, 0.6));
+        this.goalSelector.add(2, new LookAtEntityGoal(this, PlayerEntity.class, 10.0f));
+        this.goalSelector.add(3, new LookAroundGoal(this));
     }
 
     @Override

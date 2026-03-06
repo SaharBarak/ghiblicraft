@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "CCC",
+    "CSC",
+    "CFC"
+  ],
+  "key": {
+    "C": { "item": "minecraft:cobblestone" },
+    "S": { "item": "ghiblicraft:spirit_essence" },
+    "F": { "item": "minecraft:blaze_powder" }
+  },
+  "result": {
+    "item": "ghiblicraft:calcifer_furnace",
+    "count": 1
+  }
+}

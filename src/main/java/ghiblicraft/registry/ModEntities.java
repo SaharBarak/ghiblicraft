@@ -5,6 +5,8 @@ import ghiblicraft.entities.CatSpiritEntity;
 import ghiblicraft.entities.ForestGuardianEntity;
 import ghiblicraft.entities.KodamaSpiritEntity;
 import ghiblicraft.entities.SootSpriteEntity;
+import ghiblicraft.entities.NoFaceEntity;
+import ghiblicraft.entities.BroomstickEntity;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.minecraft.entity.EntityDimensions;
@@ -51,11 +53,30 @@ public class ModEntities {
                     .build()
     );
 
+    public static final EntityType<NoFaceEntity> NO_FACE = Registry.register(
+            Registries.ENTITY_TYPE,
+            new Identifier(GhibliCraft.MOD_ID, "no_face"),
+            FabricEntityTypeBuilder.create(SpawnGroup.CREATURE, NoFaceEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.6f, 2.2f))
+                    .trackRangeChunks(10)
+                    .build()
+    );
+
+    public static final EntityType<BroomstickEntity> BROOMSTICK = Registry.register(
+            Registries.ENTITY_TYPE,
+            new Identifier(GhibliCraft.MOD_ID, "broomstick"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MISC, BroomstickEntity::new)
+                    .dimensions(EntityDimensions.fixed(1.0f, 0.5f))
+                    .trackRangeChunks(10)
+                    .build()
+    );
+
     public static void register() {
         FabricDefaultAttributeRegistry.register(KODAMA_SPIRIT, KodamaSpiritEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(SOOT_SPRITE, SootSpriteEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(FOREST_GUARDIAN, ForestGuardianEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(CAT_SPIRIT, CatSpiritEntity.createAttributes());
+        FabricDefaultAttributeRegistry.register(NO_FACE, NoFaceEntity.createAttributes());
 
         GhibliCraft.LOGGER.info("Registered GhibliCraft entities.");
     }
