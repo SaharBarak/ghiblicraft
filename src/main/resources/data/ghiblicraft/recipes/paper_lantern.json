@@ -1,0 +1,1 @@
+{"type":"minecraft:crafting_shaped","pattern":["PPP","PCP","PPP"],"key":{"P":{"item":"minecraft:paper"},"C":{"item":"minecraft:candle"}},"result":{"item":"ghiblicraft:paper_lantern","count":2}}

@@ -1,0 +1,1 @@
+{"variants":{"facing=north":{"model":"ghiblicraft:block/tatami"},"facing=south":{"model":"ghiblicraft:block/tatami","y":180},"facing=east":{"model":"ghiblicraft:block/tatami","y":90},"facing=west":{"model":"ghiblicraft:block/tatami","y":270}}}

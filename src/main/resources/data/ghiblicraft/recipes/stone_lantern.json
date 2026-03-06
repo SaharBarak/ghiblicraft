@@ -1,0 +1,1 @@
+{"type":"minecraft:crafting_shaped","pattern":[" S "," T ","SSS"],"key":{"S":{"item":"minecraft:stone_bricks"},"T":{"item":"minecraft:torch"}},"result":{"item":"ghiblicraft:stone_lantern","count":1}}

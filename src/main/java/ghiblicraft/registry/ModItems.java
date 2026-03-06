@@ -59,6 +59,16 @@ public class ModItems {
     public static final Item WIND_RIDER_GLIDER = new ghiblicraft.items.WindRiderGlider();
     public static final Item SPIRIT_PORTAL_KEY = new Item(new FabricItemSettings().maxCount(1));
 
+    // Japanese Food
+    public static final Item ONIGIRI = ghiblicraft.items.food.JapaneseFoods.ONIGIRI;
+    public static final Item MOCHI = ghiblicraft.items.food.JapaneseFoods.MOCHI;
+    public static final Item GREEN_TEA = ghiblicraft.items.food.JapaneseFoods.GREEN_TEA;
+    public static final Item DANGO_ITEM = ghiblicraft.items.food.JapaneseFoods.DANGO;
+    public static final Item TAIYAKI = ghiblicraft.items.food.JapaneseFoods.TAIYAKI;
+    public static final Item TEMPURA = ghiblicraft.items.food.JapaneseFoods.TEMPURA;
+    public static final Item YAKITORI = ghiblicraft.items.food.JapaneseFoods.YAKITORI;
+    public static final Item BENTO_BOX = ghiblicraft.items.food.JapaneseFoods.BENTO_BOX;
+
     // Item Group
     public static final RegistryKey<ItemGroup> GHIBLICRAFT_GROUP = RegistryKey.of(
             RegistryKeys.ITEM_GROUP, new Identifier(GhibliCraft.MOD_ID, "ghiblicraft_items"));
@@ -76,6 +86,16 @@ public class ModItems {
         Registry.register(Registries.ITEM, new Identifier(GhibliCraft.MOD_ID, "magical_broomstick"), MAGICAL_BROOMSTICK);
         Registry.register(Registries.ITEM, new Identifier(GhibliCraft.MOD_ID, "wind_rider_glider"), WIND_RIDER_GLIDER);
         Registry.register(Registries.ITEM, new Identifier(GhibliCraft.MOD_ID, "spirit_portal_key"), SPIRIT_PORTAL_KEY);
+
+        // Japanese food
+        Registry.register(Registries.ITEM, new Identifier(GhibliCraft.MOD_ID, "onigiri"), ONIGIRI);
+        Registry.register(Registries.ITEM, new Identifier(GhibliCraft.MOD_ID, "mochi"), MOCHI);
+        Registry.register(Registries.ITEM, new Identifier(GhibliCraft.MOD_ID, "green_tea"), GREEN_TEA);
+        Registry.register(Registries.ITEM, new Identifier(GhibliCraft.MOD_ID, "dango"), DANGO_ITEM);
+        Registry.register(Registries.ITEM, new Identifier(GhibliCraft.MOD_ID, "taiyaki"), TAIYAKI);
+        Registry.register(Registries.ITEM, new Identifier(GhibliCraft.MOD_ID, "tempura"), TEMPURA);
+        Registry.register(Registries.ITEM, new Identifier(GhibliCraft.MOD_ID, "yakitori"), YAKITORI);
+        Registry.register(Registries.ITEM, new Identifier(GhibliCraft.MOD_ID, "bento_box"), BENTO_BOX);
 
         Registry.register(Registries.ITEM_GROUP, GHIBLICRAFT_GROUP,
                 FabricItemGroup.builder()
@@ -96,6 +116,14 @@ public class ModItems {
             content.add(MAGICAL_BROOMSTICK);
             content.add(WIND_RIDER_GLIDER);
             content.add(SPIRIT_PORTAL_KEY);
+            content.add(ONIGIRI);
+            content.add(MOCHI);
+            content.add(GREEN_TEA);
+            content.add(DANGO_ITEM);
+            content.add(TAIYAKI);
+            content.add(TEMPURA);
+            content.add(YAKITORI);
+            content.add(BENTO_BOX);
         });
 
         GhibliCraft.LOGGER.info("Registered GhibliCraft items.");

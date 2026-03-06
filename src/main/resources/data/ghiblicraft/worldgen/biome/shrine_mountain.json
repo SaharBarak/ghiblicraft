@@ -1,0 +1,66 @@
+{
+  "temperature": 0.3,
+  "downfall": 0.5,
+  "has_precipitation": true,
+  "effects": {
+    "sky_color": 8233727,
+    "fog_color": 13421772,
+    "water_color": 4159204,
+    "water_fog_color": 329011,
+    "grass_color": 5413431,
+    "foliage_color": 5413431,
+    "mood_sound": {
+      "sound": "minecraft:ambient.soul_sand_valley.mood",
+      "tick_delay": 3000,
+      "block_search_extent": 8,
+      "offset": 2.0
+    },
+    "music": {
+      "sound": "minecraft:music.overworld.stony_peaks",
+      "min_delay": 6000,
+      "max_delay": 24000,
+      "replace_current_music": false
+    },
+    "particle": {
+      "probability": 0.01,
+      "options": {
+        "type": "minecraft:end_rod"
+      }
+    }
+  },
+  "spawners": {
+    "monster": [
+      { "type": "minecraft:phantom", "weight": 3, "minCount": 1, "maxCount": 1 }
+    ],
+    "creature": [
+      { "type": "minecraft:goat", "weight": 8, "minCount": 1, "maxCount": 3 }
+    ],
+    "ambient": [
+      { "type": "ghiblicraft:kodama_spirit", "weight": 10, "minCount": 2, "maxCount": 5 },
+      { "type": "ghiblicraft:forest_guardian", "weight": 2, "minCount": 1, "maxCount": 1 }
+    ],
+    "axolotls": [],
+    "underground_water_creature": [],
+    "water_creature": [],
+    "water_ambient": [],
+    "misc": []
+  },
+  "spawn_costs": {},
+  "carvers": {
+    "air": ["minecraft:cave", "minecraft:canyon"]
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    ["minecraft:patch_grass_forest"],
+    ["minecraft:patch_berry_bush"],
+    [],
+    []
+  ]
+}

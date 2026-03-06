@@ -1,0 +1,57 @@
+{
+  "temperature": 0.9,
+  "downfall": 0.8,
+  "has_precipitation": true,
+  "effects": {
+    "sky_color": 7907327,
+    "fog_color": 13421772,
+    "water_color": 4566514,
+    "water_fog_color": 4159204,
+    "grass_color": 5808452,
+    "foliage_color": 5808452,
+    "mood_sound": {
+      "sound": "minecraft:ambient.cave",
+      "tick_delay": 4000,
+      "block_search_extent": 8,
+      "offset": 2.0
+    },
+    "particle": {
+      "probability": 0.02,
+      "options": {
+        "type": "minecraft:cloud"
+      }
+    }
+  },
+  "spawners": {
+    "monster": [],
+    "creature": [],
+    "ambient": [
+      { "type": "ghiblicraft:kodama_spirit", "weight": 6, "minCount": 1, "maxCount": 2 }
+    ],
+    "axolotls": [
+      { "type": "minecraft:axolotl", "weight": 5, "minCount": 1, "maxCount": 3 }
+    ],
+    "underground_water_creature": [],
+    "water_creature": [],
+    "water_ambient": [],
+    "misc": []
+  },
+  "spawn_costs": {},
+  "carvers": {
+    "air": ["minecraft:cave"]
+  },
+  "features": [
+    [],
+    ["minecraft:lake_lava_underground"],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    ["minecraft:patch_grass_forest"],
+    ["minecraft:patch_waterlily", "minecraft:patch_sugar_cane"],
+    [],
+    []
+  ]
+}
