@@ -1,0 +1,18 @@
+{
+  "kodamaSpiritSpawnRate": 1.0,
+  "sootSpriteSpawnRate": 1.0,
+  "forestGuardianSpawnRate": 0.5,
+  "catSpiritSpawnRate": 0.8,
+  "totoroForestWeight": 10,
+  "flowerValleyWeight": 8,
+  "bambooHillsWeight": 7,
+  "windmillFieldsWeight": 6,
+  "spiritLakeWeight": 5,
+  "forestPollenDensity": 1.0,
+  "fireflyDensity": 1.0,
+  "fallingLeafDensity": 1.0,
+  "morningMistDensity": 1.0,
+  "enableCustomMusic": true,
+  "enableAtmosphericSounds": true,
+  "enableComfortBuffs": true
+}

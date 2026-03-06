@@ -1,0 +1,50 @@
+{
+  "temperature": 0.8,
+  "downfall": 0.6,
+  "has_precipitation": true,
+  "effects": {
+    "sky_color": 8103167,
+    "fog_color": 12638463,
+    "water_color": 4159204,
+    "water_fog_color": 329011,
+    "grass_color": 7842607,
+    "foliage_color": 6205440,
+    "mood_sound": {
+      "sound": "minecraft:ambient.cave",
+      "tick_delay": 6000,
+      "block_search_extent": 8,
+      "offset": 2.0
+    }
+  },
+  "spawners": {
+    "monster": [],
+    "creature": [
+      { "type": "minecraft:bee", "weight": 10, "minCount": 2, "maxCount": 6 },
+      { "type": "minecraft:rabbit", "weight": 6, "minCount": 2, "maxCount": 5 }
+    ],
+    "ambient": [],
+    "water_creature": [],
+    "water_ambient": [],
+    "misc": [],
+    "underground_water_creature": [],
+    "axolotls": []
+  },
+  "spawn_costs": {},
+  "carvers": {
+    "air": ["minecraft:cave", "minecraft:canyon"]
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    ["minecraft:forest_flowers", "minecraft:flower_flower_forest", "minecraft:flower_default", "minecraft:patch_grass_forest"],
+    ["minecraft:trees_flower_forest"],
+    ["minecraft:patch_tall_grass_2"],
+    []
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WW"
+  ],
+  "key": {
+    "W": { "item": "minecraft:wheat" }
+  },
+  "result": {
+    "item": "ghiblicraft:noodles",
+    "count": 2
+  }
+}

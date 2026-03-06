@@ -1,0 +1,47 @@
+{
+  "forest_ambience": {
+    "subtitle": "subtitles.ghiblicraft.forest_ambience",
+    "sounds": [
+      {
+        "name": "ghiblicraft:ambient/forest_ambience",
+        "stream": true
+      }
+    ]
+  },
+  "village_bells": {
+    "subtitle": "subtitles.ghiblicraft.village_bells",
+    "sounds": [
+      "ghiblicraft:ambient/village_bells"
+    ]
+  },
+  "wind_grass": {
+    "subtitle": "subtitles.ghiblicraft.wind_grass",
+    "sounds": [
+      {
+        "name": "ghiblicraft:ambient/wind_grass",
+        "stream": true
+      }
+    ]
+  },
+  "river_flow": {
+    "subtitle": "subtitles.ghiblicraft.river_flow",
+    "sounds": [
+      {
+        "name": "ghiblicraft:ambient/river_flow",
+        "stream": true
+      }
+    ]
+  },
+  "kodama_click": {
+    "subtitle": "subtitles.ghiblicraft.kodama_click",
+    "sounds": [
+      "ghiblicraft:entity/kodama_click"
+    ]
+  },
+  "spirit_whisper": {
+    "subtitle": "subtitles.ghiblicraft.spirit_whisper",
+    "sounds": [
+      "ghiblicraft:entity/spirit_whisper"
+    ]
+  }
+}

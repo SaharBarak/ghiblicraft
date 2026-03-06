@@ -1,0 +1,35 @@
+{
+  "itemGroup.ghiblicraft.ghiblicraft_items": "GhibliCraft",
+
+  "item.ghiblicraft.rice_bowl": "Rice Bowl",
+  "item.ghiblicraft.ramen": "Ramen",
+  "item.ghiblicraft.dumplings": "Dumplings",
+  "item.ghiblicraft.fish_stew": "Fish Stew",
+  "item.ghiblicraft.rice": "Rice",
+  "item.ghiblicraft.noodles": "Noodles",
+  "item.ghiblicraft.dumpling_wrapper": "Dumpling Wrapper",
+  "item.ghiblicraft.spirit_essence": "Spirit Essence",
+  "item.ghiblicraft.forest_herb": "Forest Herb",
+
+  "entity.ghiblicraft.kodama_spirit": "Kodama Spirit",
+  "entity.ghiblicraft.soot_sprite": "Soot Sprite",
+  "entity.ghiblicraft.forest_guardian": "Forest Guardian",
+  "entity.ghiblicraft.cat_spirit": "Cat Spirit",
+
+  "biome.ghiblicraft.totoro_forest": "Totoro Forest",
+  "biome.ghiblicraft.flower_valley": "Flower Valley",
+  "biome.ghiblicraft.bamboo_hills": "Bamboo Hills",
+  "biome.ghiblicraft.windmill_fields": "Windmill Fields",
+  "biome.ghiblicraft.spirit_lake": "Spirit Lake",
+
+  "profession.ghiblicraft.herbalist": "Herbalist",
+  "profession.ghiblicraft.fisher": "Fisher",
+  "profession.ghiblicraft.traveling_merchant": "Traveling Merchant",
+
+  "subtitles.ghiblicraft.forest_ambience": "Forest ambience",
+  "subtitles.ghiblicraft.village_bells": "Village bells ring",
+  "subtitles.ghiblicraft.wind_grass": "Wind rustles through grass",
+  "subtitles.ghiblicraft.river_flow": "River flows gently",
+  "subtitles.ghiblicraft.kodama_click": "Kodama clicks",
+  "subtitles.ghiblicraft.spirit_whisper": "Spirit whispers"
+}

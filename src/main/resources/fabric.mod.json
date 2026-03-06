@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "ghiblicraft",
+  "version": "${version}",
+  "name": "GhibliCraft",
+  "description": "Transforms Minecraft into a peaceful, Studio Ghibli-inspired world with magical spirits, cozy villages, and atmospheric exploration.",
+  "authors": ["GhibliCraft Team"],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/ghiblicraft/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": ["ghiblicraft.GhibliCraft"],
+    "client": ["ghiblicraft.GhibliCraftClient"]
+  },
+  "mixins": ["ghiblicraft.mixins.json"],
+  "depends": {
+    "fabricloader": ">=0.14.0",
+    "fabric-api": "*",
+    "minecraft": "~1.20.1",
+    "java": ">=17"
+  }
+}

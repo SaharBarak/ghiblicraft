@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "NHN",
+    " B "
+  ],
+  "key": {
+    "N": { "item": "ghiblicraft:noodles" },
+    "H": { "item": "ghiblicraft:forest_herb" },
+    "B": { "item": "minecraft:bowl" }
+  },
+  "result": {
+    "item": "ghiblicraft:ramen",
+    "count": 1
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "temperature": 0.5,
+  "downfall": 0.9,
+  "has_precipitation": true,
+  "effects": {
+    "sky_color": 7907071,
+    "fog_color": 12638463,
+    "water_color": 6388580,
+    "water_fog_color": 2302743,
+    "grass_color": 5877296,
+    "foliage_color": 4210432,
+    "mood_sound": {
+      "sound": "minecraft:ambient.cave",
+      "tick_delay": 4000,
+      "block_search_extent": 8,
+      "offset": 2.0
+    }
+  },
+  "spawners": {
+    "monster": [],
+    "creature": [
+      { "type": "minecraft:frog", "weight": 5, "minCount": 2, "maxCount": 4 }
+    ],
+    "ambient": [],
+    "water_creature": [
+      { "type": "minecraft:squid", "weight": 3, "minCount": 1, "maxCount": 3 },
+      { "type": "minecraft:salmon", "weight": 5, "minCount": 2, "maxCount": 5 }
+    ],
+    "water_ambient": [
+      { "type": "minecraft:tropical_fish", "weight": 8, "minCount": 3, "maxCount": 8 }
+    ],
+    "misc": [],
+    "underground_water_creature": [
+      { "type": "minecraft:glow_squid", "weight": 4, "minCount": 1, "maxCount": 3 }
+    ],
+    "axolotls": [
+      { "type": "minecraft:axolotl", "weight": 5, "minCount": 1, "maxCount": 3 }
+    ]
+  },
+  "spawn_costs": {},
+  "carvers": {
+    "air": ["minecraft:cave", "minecraft:canyon"]
+  },
+  "features": [
+    [],
+    ["minecraft:lake_lava_underground"],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    ["minecraft:patch_waterlily", "minecraft:flower_swamp", "minecraft:patch_grass_normal"],
+    ["minecraft:trees_swamp"],
+    ["minecraft:seagrass_swamp"],
+    []
+  ]
+}

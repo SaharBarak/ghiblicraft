@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "W",
+    "W"
+  ],
+  "key": {
+    "W": { "item": "minecraft:wheat" }
+  },
+  "result": {
+    "item": "ghiblicraft:dumpling_wrapper",
+    "count": 4
+  }
+}
