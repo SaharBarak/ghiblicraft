@@ -7,11 +7,15 @@ import net.minecraft.entity.ai.goal.LookAtEntityGoal;
 import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.data.DataTracker;
+import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
@@ -20,11 +24,18 @@ import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
 import java.util.EnumSet;
+import java.util.UUID;
 
 public class NoFaceEntity extends PathAwareEntity {
-    private PlayerEntity following;
+    private static final TrackedData<Integer> EMOTION = DataTracker.registerData(
+            NoFaceEntity.class, TrackedDataHandlerRegistry.INTEGER);
+
+    private UUID followingUuid;
     private int giftCooldown = 0;
-    private int emotionState = 0; // 0 = neutral, 1 = happy, 2 = shy
+
+    public static final int EMOTION_NEUTRAL = 0;
+    public static final int EMOTION_HAPPY = 1;
+    public static final int EMOTION_SHY = 2;
 
     public NoFaceEntity(EntityType<? extends PathAwareEntity> entityType, World world) {
         super(entityType, world);
@@ -35,6 +46,12 @@ public class NoFaceEntity extends PathAwareEntity {
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, 40.0)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.22)
                 .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 0.5);
+    }
+
+    @Override
+    protected void initDataTracker() {
+        super.initDataTracker();
+        this.dataTracker.startTracking(EMOTION, EMOTION_NEUTRAL);
     }
 
     @Override
@@ -50,31 +67,22 @@ public class NoFaceEntity extends PathAwareEntity {
         ItemStack heldStack = player.getStackInHand(hand);
 
         if (!heldStack.isEmpty() && !this.getWorld().isClient) {
-            // No-Face accepts gifts and becomes happy
-            this.following = player;
-            this.emotionState = 1; // happy
-
-            // Consume the gift
+            this.followingUuid = player.getUuid();
+            setEmotionState(EMOTION_HAPPY);
             heldStack.decrement(1);
 
-            // Show gratitude with particles
             if (this.getWorld() instanceof ServerWorld serverWorld) {
                 serverWorld.spawnParticles(ParticleTypes.HEART,
-                        this.getX(), this.getY() + 2, this.getZ(),
-                        5, 0.3, 0.3, 0.3, 0.1);
+                        this.getX(), this.getY() + 2, this.getZ(), 5, 0.3, 0.3, 0.3, 0.1);
             }
 
             this.playSound(SoundEvents.ENTITY_ALLAY_AMBIENT_WITHOUT_ITEM, 0.8f, 0.4f);
-
-            // Schedule a return gift
-            giftCooldown = 100 + this.random.nextInt(200); // 5-15 seconds
-
+            giftCooldown = 100 + this.random.nextInt(200);
             return ActionResult.SUCCESS;
         }
 
-        // If empty hand, No-Face becomes shy
         if (heldStack.isEmpty() && !this.getWorld().isClient) {
-            this.emotionState = 2; // shy
+            setEmotionState(EMOTION_SHY);
             this.playSound(SoundEvents.ENTITY_ALLAY_HURT, 0.3f, 0.3f);
         }
 
@@ -88,39 +96,37 @@ public class NoFaceEntity extends PathAwareEntity {
         if (!this.getWorld().isClient) {
             if (giftCooldown > 0) {
                 giftCooldown--;
-                if (giftCooldown == 0 && following != null && following.isAlive() &&
-                        this.distanceTo(following) < 5.0) {
-                    giveReturnGift(following);
+                if (giftCooldown == 0 && followingUuid != null) {
+                    PlayerEntity following = this.getWorld().getPlayerByUuid(followingUuid);
+                    if (following != null && following.isAlive() && this.distanceTo(following) < 5.0) {
+                        giveReturnGift(following);
+                    }
                 }
             }
         }
 
-        // Visual effects based on emotion
         if (this.getWorld().isClient) {
-            switch (emotionState) {
-                case 1 -> { // Happy - golden sparkles
+            switch (getEmotionState()) {
+                case EMOTION_HAPPY -> {
                     if (this.random.nextInt(3) == 0) {
                         this.getWorld().addParticle(ParticleTypes.FALLING_NECTAR,
                                 this.getX() + random.nextGaussian() * 0.3,
                                 this.getY() + 1.5 + random.nextFloat(),
-                                this.getZ() + random.nextGaussian() * 0.3,
-                                0, 0, 0);
+                                this.getZ() + random.nextGaussian() * 0.3, 0, 0, 0);
                     }
                 }
-                case 2 -> { // Shy - subtle smoke
+                case EMOTION_SHY -> {
                     if (this.random.nextInt(5) == 0) {
                         this.getWorld().addParticle(ParticleTypes.SMOKE,
-                                this.getX(), this.getY() + 1.0, this.getZ(),
-                                0, 0.02, 0);
+                                this.getX(), this.getY() + 1.0, this.getZ(), 0, 0.02, 0);
                     }
                 }
-                default -> { // Neutral - mysterious aura
+                default -> {
                     if (this.random.nextInt(8) == 0) {
                         this.getWorld().addParticle(ParticleTypes.PORTAL,
                                 this.getX() + random.nextGaussian() * 0.5,
                                 this.getY() + 1.0,
-                                this.getZ() + random.nextGaussian() * 0.5,
-                                0, 0.05, 0);
+                                this.getZ() + random.nextGaussian() * 0.5, 0, 0.05, 0);
                     }
                 }
             }
@@ -128,7 +134,6 @@ public class NoFaceEntity extends PathAwareEntity {
     }
 
     private void giveReturnGift(PlayerEntity player) {
-        // No-Face gives mysterious gifts based on what it received
         ItemStack[] possibleGifts = {
                 new ItemStack(Items.GOLD_NUGGET, 3 + random.nextInt(5)),
                 new ItemStack(Items.EMERALD, 1 + random.nextInt(2)),
@@ -145,16 +150,35 @@ public class NoFaceEntity extends PathAwareEntity {
 
         if (this.getWorld() instanceof ServerWorld serverWorld) {
             serverWorld.spawnParticles(ParticleTypes.ENCHANT,
-                    this.getX(), this.getY() + 1, this.getZ(),
-                    20, 0.5, 0.5, 0.5, 0.5);
+                    this.getX(), this.getY() + 1, this.getZ(), 20, 0.5, 0.5, 0.5, 0.5);
         }
 
         this.playSound(SoundEvents.ENTITY_PLAYER_LEVELUP, 0.5f, 1.5f);
-        this.emotionState = 0; // Return to neutral
+        setEmotionState(EMOTION_NEUTRAL);
     }
 
     public int getEmotionState() {
-        return emotionState;
+        return this.dataTracker.get(EMOTION);
+    }
+
+    public void setEmotionState(int state) {
+        this.dataTracker.set(EMOTION, state);
+    }
+
+    @Override
+    public void writeCustomDataToNbt(NbtCompound nbt) {
+        super.writeCustomDataToNbt(nbt);
+        nbt.putInt("Emotion", getEmotionState());
+        nbt.putInt("GiftCooldown", giftCooldown);
+        if (followingUuid != null) nbt.putUuid("Following", followingUuid);
+    }
+
+    @Override
+    public void readCustomDataFromNbt(NbtCompound nbt) {
+        super.readCustomDataFromNbt(nbt);
+        setEmotionState(nbt.getInt("Emotion"));
+        giftCooldown = nbt.getInt("GiftCooldown");
+        if (nbt.containsUuid("Following")) followingUuid = nbt.getUuid("Following");
     }
 
     private static class FollowBefriendedPlayerGoal extends Goal {
@@ -167,17 +191,21 @@ public class NoFaceEntity extends PathAwareEntity {
 
         @Override
         public boolean canStart() {
-            return noFace.following != null && noFace.following.isAlive();
+            if (noFace.followingUuid == null) return false;
+            PlayerEntity following = noFace.getWorld().getPlayerByUuid(noFace.followingUuid);
+            return following != null && following.isAlive();
         }
 
         @Override
         public void tick() {
-            if (noFace.following == null) return;
-            noFace.getLookControl().lookAt(noFace.following, 30.0f, 30.0f);
+            if (noFace.followingUuid == null) return;
+            PlayerEntity following = noFace.getWorld().getPlayerByUuid(noFace.followingUuid);
+            if (following == null) return;
 
-            double dist = noFace.distanceTo(noFace.following);
+            noFace.getLookControl().lookAt(following, 30.0f, 30.0f);
+            double dist = noFace.distanceTo(following);
             if (dist > 4.0) {
-                noFace.getNavigation().startMovingTo(noFace.following, 0.5);
+                noFace.getNavigation().startMovingTo(following, 0.5);
             } else if (dist < 2.0) {
                 noFace.getNavigation().stop();
             }
@@ -185,8 +213,9 @@ public class NoFaceEntity extends PathAwareEntity {
 
         @Override
         public boolean shouldContinue() {
-            return noFace.following != null && noFace.following.isAlive() &&
-                    noFace.distanceTo(noFace.following) < 32.0;
+            if (noFace.followingUuid == null) return false;
+            PlayerEntity following = noFace.getWorld().getPlayerByUuid(noFace.followingUuid);
+            return following != null && following.isAlive() && noFace.distanceTo(following) < 32.0;
         }
 
         @Override

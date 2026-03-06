@@ -117,7 +117,9 @@ public class MusicBoxBlock extends Block {
                 entity -> entity.getType().getRegistryEntry().registryKey().getValue().getNamespace().equals("ghiblicraft"));
 
         for (PathAwareEntity spirit : spirits) {
-            if (spirit.distanceTo(spirit) > 5) {
+            double dx = spirit.getX() - (pos.getX() + 0.5);
+            double dz = spirit.getZ() - (pos.getZ() + 0.5);
+            if (Math.sqrt(dx * dx + dz * dz) > 5) {
                 spirit.getNavigation().startMovingTo(
                         pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, 0.5);
             }

@@ -7,7 +7,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
-import net.minecraft.inventory.SimpleInventory;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.RecipeType;
@@ -24,12 +24,12 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
-public class CalciferFurnaceBlockEntity extends BlockEntity implements NamedScreenHandlerFactory {
+public class CalciferFurnaceBlockEntity extends BlockEntity implements NamedScreenHandlerFactory, Inventory {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(3, ItemStack.EMPTY);
     private int burnTime = 0;
     private int fuelTime = 0;
     private int cookTime = 0;
-    private int cookTimeTotal = 100; // Twice as fast as normal furnace (200 -> 100)
+    private int cookTimeTotal = 100; // 2x faster than vanilla (200 -> 100)
 
     private final PropertyDelegate propertyDelegate = new PropertyDelegate() {
         @Override
@@ -63,6 +63,46 @@ public class CalciferFurnaceBlockEntity extends BlockEntity implements NamedScre
         super(ModBlockEntities.CALCIFER_FURNACE, pos, state);
     }
 
+    // Inventory implementation — provides direct access to this BE's slots
+    @Override
+    public int size() { return inventory.size(); }
+
+    @Override
+    public boolean isEmpty() {
+        for (ItemStack stack : inventory) {
+            if (!stack.isEmpty()) return false;
+        }
+        return true;
+    }
+
+    @Override
+    public ItemStack getStack(int slot) { return inventory.get(slot); }
+
+    @Override
+    public ItemStack removeStack(int slot, int amount) {
+        ItemStack result = Inventories.splitStack(inventory, slot, amount);
+        if (!result.isEmpty()) markDirty();
+        return result;
+    }
+
+    @Override
+    public ItemStack removeStack(int slot) { return Inventories.removeStack(inventory, slot); }
+
+    @Override
+    public void setStack(int slot, ItemStack stack) {
+        inventory.set(slot, stack);
+        if (stack.getCount() > getMaxCountPerStack()) stack.setCount(getMaxCountPerStack());
+        markDirty();
+    }
+
+    @Override
+    public boolean canPlayerUse(PlayerEntity player) {
+        return Inventory.canPlayerUse(this, player);
+    }
+
+    @Override
+    public void clear() { inventory.clear(); }
+
     @Override
     public Text getDisplayName() {
         return Text.translatable("block.ghiblicraft.calcifer_furnace");
@@ -71,8 +111,8 @@ public class CalciferFurnaceBlockEntity extends BlockEntity implements NamedScre
     @Nullable
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
-        return new FurnaceScreenHandler(syncId, playerInventory,
-                new SimpleInventory(inventory.toArray(new ItemStack[0])), propertyDelegate);
+        // Pass 'this' directly — now this BE implements Inventory so changes are live
+        return new FurnaceScreenHandler(syncId, playerInventory, this, propertyDelegate);
     }
 
     @Override
@@ -100,9 +140,7 @@ public class CalciferFurnaceBlockEntity extends BlockEntity implements NamedScre
 
         boolean wasBurning = burnTime > 0;
 
-        if (burnTime > 0) {
-            burnTime--;
-        }
+        if (burnTime > 0) burnTime--;
 
         ItemStack input = inventory.get(0);
         ItemStack fuel = inventory.get(1);
@@ -111,16 +149,15 @@ public class CalciferFurnaceBlockEntity extends BlockEntity implements NamedScre
         if (!input.isEmpty()) {
             Optional<SmeltingRecipe> recipe = world.getRecipeManager()
                     .getFirstMatch(RecipeType.SMELTING,
-                            new SimpleInventory(input), world);
+                            new net.minecraft.inventory.SimpleInventory(input), world);
 
             if (recipe.isPresent()) {
                 ItemStack result = recipe.get().getOutput(world.getRegistryManager());
 
                 if (burnTime <= 0 && !fuel.isEmpty()) {
-                    // Calcifer eats fuel with extra efficiency
                     burnTime = net.minecraft.block.entity.AbstractFurnaceBlockEntity
                             .createFuelTimeMap().getOrDefault(fuel.getItem(), 0);
-                    burnTime = (int) (burnTime * 1.5); // 50% more burn time
+                    burnTime = (int) (burnTime * 1.5); // Calcifer's 50% fuel efficiency boost
                     fuelTime = burnTime;
                     fuel.decrement(1);
                 }
@@ -129,7 +166,6 @@ public class CalciferFurnaceBlockEntity extends BlockEntity implements NamedScre
                     cookTime++;
                     if (cookTime >= cookTimeTotal) {
                         cookTime = 0;
-
                         if (output.isEmpty()) {
                             inventory.set(2, result.copy());
                         } else if (output.isOf(result.getItem())) {

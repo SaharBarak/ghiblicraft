@@ -116,18 +116,21 @@ public class SpiritBefriendGoal extends Goal {
 
     private void grantCompanionBuff(PlayerEntity player) {
         net.minecraft.entity.effect.StatusEffectInstance effect;
-        String spiritClass = spirit.getClass().getSimpleName();
+        net.minecraft.entity.EntityType<?> type = spirit.getType();
 
-        effect = switch (spiritClass) {
-            case "KodamaSpiritEntity" -> new net.minecraft.entity.effect.StatusEffectInstance(
+        if (type == ghiblicraft.registry.ModEntities.KODAMA_SPIRIT) {
+            effect = new net.minecraft.entity.effect.StatusEffectInstance(
                     net.minecraft.entity.effect.StatusEffects.LUCK, 1200, 0, true, false);
-            case "SootSpriteEntity" -> new net.minecraft.entity.effect.StatusEffectInstance(
+        } else if (type == ghiblicraft.registry.ModEntities.SOOT_SPRITE) {
+            effect = new net.minecraft.entity.effect.StatusEffectInstance(
                     net.minecraft.entity.effect.StatusEffects.NIGHT_VISION, 1200, 0, true, false);
-            case "CatSpiritEntity" -> new net.minecraft.entity.effect.StatusEffectInstance(
+        } else if (type == ghiblicraft.registry.ModEntities.CAT_SPIRIT) {
+            effect = new net.minecraft.entity.effect.StatusEffectInstance(
                     net.minecraft.entity.effect.StatusEffects.SPEED, 1200, 0, true, false);
-            default -> new net.minecraft.entity.effect.StatusEffectInstance(
+        } else {
+            effect = new net.minecraft.entity.effect.StatusEffectInstance(
                     net.minecraft.entity.effect.StatusEffects.REGENERATION, 600, 0, true, false);
-        };
+        }
 
         player.addStatusEffect(effect);
     }

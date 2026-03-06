@@ -36,7 +36,8 @@ public class SeasonalCycleManager {
         }
     }
 
-    private static Season lastSeason = null;
+    // Track last announced season per-player to avoid static state issues
+    private static final java.util.Map<java.util.UUID, Season> lastAnnouncedSeason = new java.util.WeakHashMap<>();
 
     public static void register() {
         ServerTickEvents.END_WORLD_TICK.register(world -> {
@@ -44,10 +45,13 @@ public class SeasonalCycleManager {
 
             Season currentSeason = getCurrentSeason(world);
 
-            // Announce season change
-            if (lastSeason != currentSeason) {
-                announceSeason(world, currentSeason);
-                lastSeason = currentSeason;
+            // Announce season change per-player
+            for (ServerPlayerEntity player : world.getPlayers()) {
+                Season last = lastAnnouncedSeason.get(player.getUuid());
+                if (last != currentSeason) {
+                    announceSeasonToPlayer(player, currentSeason);
+                    lastAnnouncedSeason.put(player.getUuid(), currentSeason);
+                }
             }
 
             // Apply seasonal effects every 200 ticks
@@ -57,31 +61,27 @@ public class SeasonalCycleManager {
         });
     }
 
+    private static void announceSeasonToPlayer(ServerPlayerEntity player, Season season) {
+        player.sendMessage(
+                Text.literal("The season has changed to " + season.name + "!")
+                        .formatted(season.color, Formatting.BOLD),
+                false);
+        switch (season) {
+            case SPRING -> player.addStatusEffect(
+                    new StatusEffectInstance(StatusEffects.REGENERATION, 600, 0, true, false));
+            case SUMMER -> player.addStatusEffect(
+                    new StatusEffectInstance(StatusEffects.HASTE, 600, 0, true, false));
+            case AUTUMN -> player.addStatusEffect(
+                    new StatusEffectInstance(StatusEffects.LUCK, 600, 0, true, false));
+            case WINTER -> player.addStatusEffect(
+                    new StatusEffectInstance(StatusEffects.RESISTANCE, 600, 0, true, false));
+        }
+    }
+
     public static Season getCurrentSeason(ServerWorld world) {
         long totalTime = world.getTimeOfDay();
         int seasonIndex = (int) ((totalTime / SEASON_LENGTH) % 4);
         return Season.values()[seasonIndex];
-    }
-
-    private static void announceSeason(ServerWorld world, Season season) {
-        for (ServerPlayerEntity player : world.getPlayers()) {
-            player.sendMessage(
-                    Text.literal("The season has changed to " + season.name + "!")
-                            .formatted(season.color, Formatting.BOLD),
-                    false);
-
-            // Season-specific welcome buff
-            switch (season) {
-                case SPRING -> player.addStatusEffect(
-                        new StatusEffectInstance(StatusEffects.REGENERATION, 600, 0, true, false));
-                case SUMMER -> player.addStatusEffect(
-                        new StatusEffectInstance(StatusEffects.HASTE, 600, 0, true, false));
-                case AUTUMN -> player.addStatusEffect(
-                        new StatusEffectInstance(StatusEffects.LUCK, 600, 0, true, false));
-                case WINTER -> player.addStatusEffect(
-                        new StatusEffectInstance(StatusEffects.RESISTANCE, 600, 0, true, false));
-            }
-        }
     }
 
     private static void applySeasonalEffects(ServerWorld world, Season season) {

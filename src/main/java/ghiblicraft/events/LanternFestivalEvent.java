@@ -10,62 +10,59 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class LanternFestivalEvent {
     // Festival happens during the first night of every 7th in-game day
     private static final long DAY_LENGTH = 24000L;
     private static final int FESTIVAL_INTERVAL_DAYS = 7;
-    private static boolean festivalActive = false;
-    private static boolean announcedThisCycle = false;
+    // Track which day each player was last announced for
+    private static final java.util.Map<java.util.UUID, Long> announcedForDay = new java.util.WeakHashMap<>();
+
+    public static boolean isFestivalActiveNow(ServerWorld world) {
+        long dayNumber = world.getTimeOfDay() / DAY_LENGTH;
+        long timeOfDay = world.getTimeOfDay() % DAY_LENGTH;
+        return dayNumber > 0 && dayNumber % FESTIVAL_INTERVAL_DAYS == 0
+                && timeOfDay >= 13000 && timeOfDay <= 23000;
+    }
 
     public static void register() {
         ServerTickEvents.END_WORLD_TICK.register(world -> {
             if (world.getRegistryKey() != World.OVERWORLD) return;
 
-            long dayNumber = world.getTimeOfDay() / DAY_LENGTH;
-            long timeOfDay = world.getTimeOfDay() % DAY_LENGTH;
+            if (isFestivalActiveNow(world)) {
+                long dayNumber = world.getTimeOfDay() / DAY_LENGTH;
+                long timeOfDay = world.getTimeOfDay() % DAY_LENGTH;
 
-            boolean isFestivalDay = dayNumber > 0 && dayNumber % FESTIVAL_INTERVAL_DAYS == 0;
-            boolean isNight = timeOfDay >= 13000 && timeOfDay <= 23000;
-
-            if (isFestivalDay && isNight) {
-                if (!festivalActive) {
-                    startFestival(world);
-                    festivalActive = true;
+                // Announce to players who haven't been told yet this cycle
+                for (ServerPlayerEntity player : world.getPlayers()) {
+                    Long lastDay = announcedForDay.get(player.getUuid());
+                    if (lastDay == null || lastDay != dayNumber) {
+                        announceFestivalToPlayer(player, world);
+                        announcedForDay.put(player.getUuid(), dayNumber);
+                    }
                 }
+
                 tickFestival(world, timeOfDay);
-            } else {
-                if (festivalActive) {
-                    endFestival(world);
-                    festivalActive = false;
-                    announcedThisCycle = false;
-                }
             }
         });
     }
 
-    private static void startFestival(ServerWorld world) {
-        if (announcedThisCycle) return;
-        announcedThisCycle = true;
+    private static void announceFestivalToPlayer(ServerPlayerEntity player, ServerWorld world) {
+        player.sendMessage(
+                Text.literal("The Lantern Festival has begun! Look to the sky...")
+                        .formatted(Formatting.GOLD, Formatting.ITALIC),
+                false);
 
-        for (ServerPlayerEntity player : world.getPlayers()) {
-            player.sendMessage(
-                    Text.literal("The Lantern Festival has begun! Look to the sky...")
-                            .formatted(Formatting.GOLD, Formatting.ITALIC),
-                    false);
+        // Festival blessing
+        player.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 6000, 0, true, false));
+        player.addStatusEffect(new StatusEffectInstance(StatusEffects.LUCK, 6000, 1, true, false));
+        player.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 6000, 0, true, false));
 
-            // Festival blessing
-            player.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 6000, 0, true, false));
-            player.addStatusEffect(new StatusEffectInstance(StatusEffects.LUCK, 6000, 1, true, false));
-            player.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 6000, 0, true, false));
-
-            // Opening sound
-            world.playSound(null, player.getBlockPos(),
-                    SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, SoundCategory.AMBIENT,
-                    0.5f, 1.2f);
-        }
+        // Opening sound
+        world.playSound(null, player.getBlockPos(),
+                SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, SoundCategory.AMBIENT,
+                0.5f, 1.2f);
     }
 
     private static void tickFestival(ServerWorld world, long timeOfDay) {
@@ -133,7 +130,4 @@ public class LanternFestivalEvent {
         }
     }
 
-    public static boolean isFestivalActive() {
-        return festivalActive;
-    }
 }
